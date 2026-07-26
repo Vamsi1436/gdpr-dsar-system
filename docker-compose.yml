@@ -1,0 +1,25 @@
+version: "3.9"
+services: {
+postgres: {
+image: "postgres:16-alpine",
+container_name: "dsar-postgres",
+restart: "unless-stopped",
+environment: {
+POSTGRES_DB: "dsar_db",
+POSTGRES_USER: "dsar_user",
+POSTGRES_PASSWORD: "dsar_password"
+},
+ports: ["5432:5432"],
+volumes: ["dsar_postgres_data:/var/lib/postgresql/data"]
+},
+adminer: {
+image: "adminer:latest",
+container_name: "dsar-adminer",
+restart: "unless-stopped",
+ports: ["8081:8080"],
+depends_on: ["postgres"]
+}
+}
+volumes: {
+dsar_postgres_data: {}
+}
