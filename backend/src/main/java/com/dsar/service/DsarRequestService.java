@@ -62,6 +62,11 @@ private final DsarRequestRepository requestRepository;
       return toDto(findEntity(id));
     }
 
+@Transactional(readOnly = true)
+    public DsarRequest getEntityById(Long id) {
+      return findEntity(id);
+    }
+
 @Transactional
     public RequestResponseDto assign(Long requestId, Long userId, User actor) {
       DsarRequest request = findEntity(requestId);
